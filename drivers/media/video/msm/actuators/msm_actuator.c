@@ -637,6 +637,7 @@ static int32_t msm_actuator_set_default_focus(
 static int32_t msm_actuator_power_down(struct msm_actuator_ctrl_t *a_ctrl)
 {
 	int32_t rc = 0;
+	int ACT_STOP_POS = 0;
 	int cur_pos = a_ctrl->curr_step_pos;
 	struct msm_actuator_move_params_t move_params;
 
