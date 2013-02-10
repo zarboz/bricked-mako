@@ -18,6 +18,9 @@
 
 #define COMMAND_LINE_SIZE 1024
 
+/* information about the system we're running on */
+extern unsigned int system_rev;
+
 /* The list ends with an ATAG_NONE node. */
 #define ATAG_NONE	0x00000000
 
@@ -95,6 +98,7 @@ struct tag_serialnr {
 
 struct tag_revision {
 	__u32 rev;
+	__u32 rev2;
 };
 
 /* initial values for vesafb-type framebuffers. see struct screen_info
@@ -143,6 +147,13 @@ struct tag_memclk {
 	__u32 fmemclk;
 };
 
+/* Light sensor calibration value */
+#define ATAG_ALS	0x5441001b
+
+struct tag_als_kadc {
+	__u32 kadc;
+};
+
 struct tag {
 	struct tag_header hdr;
 	union {
@@ -155,7 +166,7 @@ struct tag {
 		struct tag_revision	revision;
 		struct tag_videolfb	videolfb;
 		struct tag_cmdline	cmdline;
-
+		struct tag_als_kadc als_kadc;
 		/*
 		 * Acorn specific
 		 */
